@@ -21,7 +21,10 @@ export default function Register() {
     })
 
     return (
-        <form action="" className={styles.form}>
+        <form 
+            action="" 
+            className={styles.form}
+            onSubmit={user.handleRegisterSubmit}>
             <Image 
                 src={background}
                 alt=''
@@ -63,8 +66,7 @@ export default function Register() {
                 onChange={user.setConfirmPassword}
                 className={styles.input} />
                 <Button 
-                type="submit"
-                onSubmit={user.handleRegisterSubmit}>
+                type="submit">
                     sign up
                 </Button>
                 <div className={styles.footer}>

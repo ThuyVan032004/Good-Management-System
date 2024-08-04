@@ -1,65 +1,50 @@
-import { ChangeEvent, FormEvent } from "react";
-import AccountOps, { Account } from "./Interface.Account";
+import { ChangeEvent, FormEventHandler, FormEvent } from "react";
+import Account from "@/Shared/Management.User/Account/Interface.Account";
 import axios from "axios";
 import { loginRoute, registerRoute } from "@/Shared/Api/APIRoutes";
 
-export default class User implements AccountOps {
-    private user : Account
+export default class User implements Account {
+    username : string
+    email : string
+    password : string
+    confirmPassword? : string
     constructor() {
-        this.user = {
-            username : "",
-            email : "",
-            password : "",
-        }
+        this.username = ''
+        this.email = ''
+        this.password = ''
+        this.confirmPassword = ''
     }
 
-    getUserInfo(): Account {
-        if(this.user.confirmPassword === '')
-        {
-            return {
-                username : this.user.username,
-                email : this.user.email,
-                password : this.user.password
-            }
-        }
-        return {
-            username : this.user.username,
-            email : this.user.email,
-            password : this.user.password,
-            confirmPassword : this.user.confirmPassword
-        }
+    setUsername = (event: ChangeEvent<HTMLInputElement>): void => {
+        this.username = event.target.value 
     }
 
-    setUsername(event: ChangeEvent<HTMLInputElement>): void {
-        this.user.username = event.target.value
+    setEmail = (event: ChangeEvent<HTMLInputElement>): void => {
+        this.email = event.target.value
     }
 
-    setEmail(event: ChangeEvent<HTMLInputElement>): void {
-        this.user.email = event.target.value
+    setPassword = (event: ChangeEvent<HTMLInputElement>): void => {
+        this.password = event.target.value
     }
 
-    setPassword(event: ChangeEvent<HTMLInputElement>): void {
-        this.user.password = event.target.value
+    setConfirmPassword = (event: ChangeEvent<HTMLInputElement>): void => {
+        this.confirmPassword = event.target.value
     }
 
-    setConfirmPassword(event: ChangeEvent<HTMLInputElement>): void {
-        this.user.confirmPassword = event.target.value
-    }
-
-    handleRegisterValidation(): boolean {
-        if(this.user.username.length < 5)
+    handleRegisterValidation = () : boolean => {
+        if(this.username.length < 5)
         {
             alert("Username must be at least 5 characters")
             return false
         }
 
-        if(this.user.confirmPassword !== this.user.password)
+        if(this.confirmPassword !== this.password)
         {
             alert("Password and Confirm Password must be the same")
             return false
         }
 
-        if(this.user.password.length < 8)
+        if(this.password.length < 8)
         {
             alert("Password must contain at least 8 characters")
             return false
@@ -67,14 +52,14 @@ export default class User implements AccountOps {
         return true
     }
 
-    async handleRegisterSubmit(event: FormEvent<HTMLButtonElement>): Promise<void> {
+    handleRegisterSubmit = async (event : FormEvent<HTMLFormElement>): Promise<void> => {
         event.preventDefault()
         if(this.handleRegisterValidation())
         {
             const { data } = await axios.post(registerRoute, {
-                username : this.user.username,
-                email : this.user.email,
-                password : this.user.password
+                username : this.username,
+                email : this.email,
+                password : this.password
             })
 
             if(data.status === false) 
@@ -89,21 +74,21 @@ export default class User implements AccountOps {
         }
     }
 
-    async handleLoginSubmit(event: FormEvent<HTMLButtonElement>): Promise<void> {
+    handleLoginSubmit = async (event: FormEvent<HTMLFormElement>) : Promise<void> => {
         event.preventDefault()
-        if(this.user.username === "")
+        if(this.username === "")
         {
             alert("Username required")
         }
 
-        if(this.user.password === "")
+        if(this.password === "")
         {
             alert("Password required")
         }
 
         const { data } = await axios.post(loginRoute, {
-            username : this.user.username,
-            password : this.user.password
+            username : this.username,
+            password : this.password
         })
 
         if(data.status === false) 
