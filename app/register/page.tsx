@@ -1,19 +1,22 @@
+'use client'
+
 import background from '../../public/circle.png'
 import { Button } from '../components/button/button'
 import Image from 'next/image'
 import styles from '@/app/register/page.module.css'
 import Link from 'next/link'
 import User from '@/Shared/Management.User/Account/Implementation.Account'
+import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
-import { redirect } from 'next/navigation'
 
 export default function Register() {
     let user = new User()
+    const router = useRouter()  
 
     useEffect(() => {
         if(localStorage.getItem("user"))
         {
-            redirect('/')
+            router.push('/')
         }
     })
 

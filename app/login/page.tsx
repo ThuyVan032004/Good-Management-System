@@ -1,12 +1,24 @@
+'use client'
+
 import background from '../../public/circle.png'
 import { Button } from '../components/button/button'
 import Image from 'next/image'
 import styles from '@/app/login/page.module.css'
 import Link from 'next/link'
 import User from '@/Shared/Management.User/Account/Implementation.Account'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function Login() {
     let user = new User()
+    const router = useRouter()  
+
+    useEffect(() => {
+        if(localStorage.getItem("user"))
+        {
+            router.push('/')
+        }
+    })
 
     return (
         <form action="" className={styles.form}>
@@ -18,13 +30,13 @@ export default function Login() {
                 />
 
             <div className={styles.main}>
-            <div className={styles.title}>SIGN UP</div>
+            <div className={styles.title}>LOGIN</div>
                 <input 
                 type="text" 
                 name="username" 
                 id="" 
                 placeholder="username"
-                onChange={() => {user.setUsername}}
+                onChange={user.setUsername}
                 className={styles.input} />
                 
                 <input 
@@ -32,11 +44,11 @@ export default function Login() {
                 name="password" 
                 id="" 
                 placeholder="password"
-                onChange={() => {user.setPassword}}
+                onChange={user.setPassword}
                 className={styles.input} />
                 <Button 
                 type="submit"
-                onSubmit={() => {user.handleLoginSubmit}}>
+                onSubmit={user.handleLoginSubmit}>
                     login
                 </Button>
                 <div className={styles.footer}>

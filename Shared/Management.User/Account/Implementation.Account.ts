@@ -114,7 +114,6 @@ export default class User implements AccountOps {
         if(data.status === true) 
         {
             localStorage.setItem("user", JSON.stringify(data.user))
-            redirect('/')
         }
     }
 }
