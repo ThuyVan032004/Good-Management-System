@@ -1,0 +1,13 @@
+.button {
+    width: 10rem;
+    height: 3rem;
+    border: none;
+    border-radius: 2rem;
+    font-size: medium;
+    font-weight: 550;
+    background-image: linear-gradient(to left, #FF3C5F, #9340FF);
+
+    &:hover {
+        cursor: pointer;
+    }
+}

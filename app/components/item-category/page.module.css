@@ -1,0 +1,16 @@
+.input {
+    width: 16vw;
+    height: 3.5rem;
+    border: none;
+    outline: none;
+    border-radius: 0.4rem;
+    padding-left: 1rem;
+    color: rgb(255, 255, 255);
+    background-color: #11192f;
+    transition: 0s background-color;
+    margin-bottom: 1rem;
+
+    &:hover {
+        background-color: #1B2B51;
+    }
+}

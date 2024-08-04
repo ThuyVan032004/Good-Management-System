@@ -1,0 +1,41 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        gap: 2.5rem;
+        position: absolute;
+        top: 4.6rem;
+
+        .title {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .input {
+            outline: none;
+            border: none;
+            background-image: linear-gradient(135, #dbcccc, #ffffff);
+            border-radius: 0.5rem;
+            width: 40%;
+            height: 4rem;
+            padding-left: 1rem;
+        }
+
+        .footer {
+            font-size: large;
+
+            .login {
+                font-weight: 600;
+                color: rgb(187, 119, 238);
+            }
+        }
+    }
+}
